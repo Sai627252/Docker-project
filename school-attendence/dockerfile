@@ -1,0 +1,20 @@
+# Use the official NGINX image
+FROM nginx:latest
+
+# Set a custom document root
+WORKDIR /var/www/html
+
+# Copy website files from the host machine to the container
+COPY ./website /var/www/html
+
+# Update NGINX configuration to use the new document root
+RUN sed -i 's|/usr/share/nginx/html|/var/www/html|g' /etc/nginx/nginx.conf
+
+# Ensure proper file permissions
+RUN chown -R nginx:nginx /var/www/html
+
+# Expose port 80 for HTTP traffic
+EXPOSE 80
+
+# Start NGINX in the foreground
+CMD ["nginx", "-g", "daemon off;"]

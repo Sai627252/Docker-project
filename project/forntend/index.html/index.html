@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Frontend</title>
+</head>
+<body>
+    <h1>Welcome to the Frontend</h1>
+    <p>Backend API: <span id="api-response"></span></p>
+
+    <script>
+        fetch('http://backend:5000/')
+            .then(response => response.text())
+            .then(data => document.getElementById("api-response").innerText = data)
+            .catch(error => console.error("Error:", error));
+    </script>
+</body>
+</html>

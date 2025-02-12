@@ -1,0 +1,30 @@
+version: '3'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+    networks:
+      - app-network
+
+  database:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: school
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+networks:
+  app-network:
